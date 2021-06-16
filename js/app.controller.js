@@ -10,7 +10,8 @@ window.onGetUserPos = onGetUserPos;
 function onInit() {
     mapService.initMap()
         .then(() => {
-            console.log('Map is ready');
+            console.log(gMap);
+            // console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
 }
