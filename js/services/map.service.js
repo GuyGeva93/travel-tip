@@ -1,5 +1,3 @@
-
-
 export const mapService = {
     initMap,
     addMarker,
@@ -15,18 +13,45 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
-            console.log('Map!', gMap);
+                    center: { lat, lng },
+                    zoom: 15
+                })
+            return gMap
         })
-}
 
-function addMarker(loc) {
+}
+// .addListener("click", (mapsMouseEvent) => {
+//     addMarker(mapsMouseEvent.latLng, prompt('location name'))
+
+
+// // function showLoc() {
+//     // Create the initial InfoWindow.
+//     let infoWindow = new google.maps.InfoWindow({
+//         content: "Click the map to get Lat/Lng!",
+//         position: myLatlng,
+//     });
+//     infoWindow.open(gMap);
+//     // Configure the click listener.
+//     gMap.addListener("click", (mapsMouseEvent) => {
+//         // Close the current InfoWindow.
+//         infoWindow.close();
+//         // Create a new InfoWindow.
+//         infoWindow = new google.maps.InfoWindow({
+//             position: mapsMouseEvent.latLng,
+//         });
+//         infoWindow.setContent(
+//             JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+//         );
+//         infoWindow.open(gMap);
+//     });
+// // }
+
+
+function addMarker(loc, title) {
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: 'Hello World!'
+        title
     });
     return marker;
 }
@@ -40,7 +65,8 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+
+    const API_KEY = 'AIzaSyBOCP1C7QADD9uueRe46CBBkb-mZc2Aj4o'; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
