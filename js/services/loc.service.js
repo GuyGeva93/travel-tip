@@ -1,12 +1,31 @@
+import { storageService } from './local-storage.service.js';
+
 export const locService = {
-    getLocs
+    getLocs,
+    addLoc
 }
 
+let nextId = 101
+const STORAGE_KEY = 'locationsDB';
 
-const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 }, 
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
-]
+function addLoc(title, lat, lng) {
+    let loc = {
+        id: _makeId(),
+        title,
+        lat,
+        lng,
+        createdAt: Date.now()
+    }
+    addLocs(loc)
+}
+
+const locs = []
+
+function addLocs(loc) {
+    locs.push(loc)
+    storageService.saveToStorage(STORAGE_KEY, locs);
+}
+
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -16,4 +35,6 @@ function getLocs() {
     });
 }
 
-
+function _makeId() {
+    return nextId++;
+}

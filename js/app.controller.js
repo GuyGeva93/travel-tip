@@ -8,12 +8,14 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 
 
-
 function onInit() {
     mapService.initMap()
         .then((map) => {
             map.addListener("click", (mapsMouseEvent) => {
-                mapService.addMarker(mapsMouseEvent.latLng, prompt('location name'))
+                let title = prompt('location name');
+                mapService.addMarker(mapsMouseEvent.latLng, title)
+                let latLng = mapsMouseEvent.latLng.toJSON()
+                locService.addLoc(title, latLng.lat, latLng.lng);
             })
         })
         .catch(() => console.log('Error: cannot init map'));
@@ -27,13 +29,7 @@ function getPosition() {
     })
 }
 
-
-
-function onAddMarker() {
-    console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-}
-
+//TODO -> renderLocs
 function onGetLocs() {
     locService.getLocs()
         .then(locs => {
