@@ -29,6 +29,7 @@ function getPosition() {
   })
 }
 
+//TODO -> renderLocs
 function onGetLocs() {
   locService.getLocs()
     .then(locs => {
