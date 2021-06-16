@@ -2,25 +2,13 @@ import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 
 window.onload = onInit;
-window.onAddMarker = onAddMarker;
+// window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
-window.onGetLocs = onGetLocs;
+window.onGetLocs = renderLocs;
 window.onGetUserPos = onGetUserPos;
 
 
 function onInit() {
-<<<<<<< HEAD
-    mapService.initMap()
-        .then((map) => {
-            map.addListener("click", (mapsMouseEvent) => {
-                let title = prompt('location name');
-                mapService.addMarker(mapsMouseEvent.latLng, title)
-                let latLng = mapsMouseEvent.latLng.toJSON()
-                locService.addLoc(title, latLng.lat, latLng.lng);
-            })
-        })
-        .catch(() => console.log('Error: cannot init map'));
-=======
   mapService.initMap()
     .then((map) => {
       map.addListener("click", (mapsMouseEvent) => {
@@ -31,30 +19,31 @@ function onInit() {
       })
     })
     .catch(() => console.log('Error: cannot init map'));
->>>>>>> ed2b30deab1befc2ad022f1e758c3843c13a11ff
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
-<<<<<<< HEAD
-    console.log('Getting Pos');
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
-=======
   console.log('Getting Pos');
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject)
   })
->>>>>>> ed2b30deab1befc2ad022f1e758c3843c13a11ff
 }
 
 //TODO -> renderLocs
-function onGetLocs() {
+function renderLocs() {
   locService.getLocs()
     .then(locs => {
-      console.log('Locations:', locs)
-      document.querySelector('.locs').innerText = JSON.stringify(locs)
+      if (!locs || !locs.length) return
+      let strHtml = locs.map(loc => {
+        return `<tr>
+        <td>${loc.title}</td>
+        <td>${loc.lat}</td>
+        <td>${loc.lng}</td>
+        <td>${loc.createdAt}</td>
+        </tr>`
+      })
+      document.querySelector('.locs-table').innerHTML += strHtml;
+      // document.querySelector('.locs').innerText = JSON.stringify(locs)
     })
 }
 

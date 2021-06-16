@@ -2,24 +2,35 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelTip</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelTip</title>
 </head>
 
 <body>
-    <h1>TravelTip Starter!</h1>
-    <div id="map" style="width: 60%; height: 400px;"></div>
-    <!-- <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button> -->
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+  <h1>TravelTip Starter!</h1>
+  <div id="map" style="width: 60%; height: 400px;"></div>
+  <!-- <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button> -->
+  <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
+  <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+  <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
 
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
+  <p>You are at: <span class="user-pos"></span></p>
+  <!-- <p>Locations: <span class="locs"></span></p> -->
+  <section class="locs-container">
+    <table class="locs-table">
+      <tr>
+        <th>Name</th>
+        <th>LAT</th>
+        <th>LNG</th>
+        <th>Created at</th>
+      </tr>
+
+    </table>
+  </section>
 
 
-    <script type="module" src="js/app.controller.js"></script>
+  <script type="module" src="js/app.controller.js"></script>
 </body>
 
 </html>
