@@ -1,5 +1,3 @@
-
-
 export const mapService = {
   initMap,
   addMarker,
@@ -18,14 +16,16 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         center: { lat, lng },
         zoom: 15
       })
+      return gMap
     })
+
 }
 
-function addMarker(loc) {
+function addMarker(loc, title) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
-    title: 'Hello World!'
+    title
   });
   return marker;
 }
@@ -36,12 +36,10 @@ function panTo(lat, lng) {
   gMap.panTo(laLatLng);
 }
 
-
-
 function _connectGoogleApi() {
   if (window.google) return Promise.resolve()
-  const API_KEY = 'AIzaSyDmwDI703BWYZGqpMfuok31uviI3rKXWH0'
-  var elGoogleApi = document.createElement('script');
+  const API_KEY = 'AIzaSyBOCP1C7QADD9uueRe46CBBkb-mZc2Aj4o';
+  var elGoogleApi = document.createElement('script')
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
   elGoogleApi.async = true;
   document.body.append(elGoogleApi);
